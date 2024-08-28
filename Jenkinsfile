@@ -23,10 +23,20 @@
 // Declarative pipeline
 pipeline{
 	agent any
+	// agent {docker {image 'maven:3.6.3'}} we can run the pipeline inside a docker image also
+	// agent {docker {image 'node:13.8'}}
 	stages{
 		stage('Build') {
 			steps{
+				// sh "node --version"
 				echo "Build"
+				// Trying to understand the environment variables mentioned in pipeline -> pipeline syntax -> env
+				echo "PATH - $PATH"
+				echo "BUILD_NUMBER - $env.BUILD_NUMBER"
+				echo "BUILD_ID - $env.BUILD_ID"
+				echo "BUILD_TAG - $env.BUILD_TAG"
+				echo "BUILD_URL - $env.BUILD_URL"
+				echo "JOB_NAME - $env.JOB_NAME"
 				}
 			}
 		stage('Test') {
