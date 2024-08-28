@@ -36,7 +36,7 @@ pipeline{
 		stage('Build') {
 			steps{
 				// sh "node --version"
-				sh "maven --version" 
+				// sh "maven --version" 
 				sh "docker version"
 				echo "Build"
 				// Trying to understand the environment variables mentioned in pipeline -> pipeline syntax -> env
