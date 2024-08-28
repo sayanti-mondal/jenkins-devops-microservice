@@ -79,7 +79,7 @@ pipeline{
 			steps{
 			// docker build -t sayanti090/currency-exchange-devops:tagname
 			    script {
-                   dockerImage = docker.build("sayanti090/currency-exchange-devops:$(env.BUILD_TAG)")
+                   dockerImage = docker.build("sayanti090/currency-exchange-devops:$env.BUILD_TAG")
 			    }
 			}
 		}
