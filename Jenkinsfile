@@ -39,7 +39,7 @@ pipeline{
 				sh "mvn --version" 
 				sh "docker version"
 				echo "Build"
-				Trying to understand the environment variables mentioned in pipeline -> pipeline syntax -> env
+				// Trying to understand the environment variables mentioned in pipeline -> pipeline syntax -> env
 				echo "PATH - $PATH" // /opt/java/openjdk/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
 				echo "BUILD_NUMBER - $env.BUILD_NUMBER"
 				echo "BUILD_ID - $env.BUILD_ID"
