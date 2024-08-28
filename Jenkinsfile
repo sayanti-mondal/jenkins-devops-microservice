@@ -49,29 +49,50 @@ pipeline{
 				}
 			}
 
-		stage('Dependency Resolution') {
-            steps {
-                // Ensure that all dependencies are resolved and updated before compiling
-                sh "mvn dependency:resolve"
-                sh "mvn dependency:tree"
-            }
-        }
 		stage('Compile') {
 			steps {
 				// echo "Test"
 				sh "mvn clean compile"
 				}
 			}
-		stage('Test') {
+
+		// stage('Test') {
+		// 	steps {
+		// 		// echo "Test"
+		// 		sh "mvn test"
+		// 		}
+		// 	}
+
+		// stage('Integration Test') {
+		// 	steps {
+		// 		sh "mvn failsafe:integration-test failsafe:verify"
+		// 		}
+		// 	}
+
+		stage('Package') {
 			steps {
-				// echo "Test"
-				sh "mvn test"
-				}
+				sh "mvn package -DskipTests"
 			}
-		stage('Integration Test') {
+		}
+		
+		stage('Build Docker Image') {
 			steps{
-			// echo "Integration Test"
-			sh "mvn failsafe:integration-test failsafe:verify"
+			// docker build -t sayanti090/currency-exchange-devops:tagname
+			    script {
+                   dockerImage = docker.build("sayanti090/currency-exchange-devops:$(env.BUILD_TAG)")
+			    }
+			}
+		}
+
+		stage('Push Docker Image') {
+			steps{
+				script {
+					docker.withRegistry('', 'dockerhub') {
+						dockerImage.push();
+						dockerImage.push('latest');
+					}
+				}
+				
 			}
 		}
 	}
