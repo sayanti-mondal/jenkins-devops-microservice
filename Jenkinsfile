@@ -48,6 +48,14 @@ pipeline{
 				echo "JOB_NAME - $env.JOB_NAME"
 				}
 			}
+
+		stage('Dependency Resolution') {
+            steps {
+                // Ensure that all dependencies are resolved and updated before compiling
+                sh "mvn dependency:resolve"
+                sh "mvn dependency:tree"
+            }
+        }
 		stage('Compile') {
 			steps {
 				// echo "Test"
