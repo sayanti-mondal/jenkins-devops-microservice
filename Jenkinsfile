@@ -33,19 +33,19 @@ pipeline{
 		   PATH = "$dockerHome/bin:$mavenHome/bin:$PATH"
 	}
 	stages{
-		stage('Build') {
+		stage('Checkout') {
 			steps{
 				// sh "node --version"
 				sh "mvn --version" 
 				sh "docker version"
 				echo "Build"
-				// Trying to understand the environment variables mentioned in pipeline -> pipeline syntax -> env
-				// echo "PATH - $PATH" // /opt/java/openjdk/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
-				// echo "BUILD_NUMBER - $env.BUILD_NUMBER"
-				// echo "BUILD_ID - $env.BUILD_ID"
-				// echo "BUILD_TAG - $env.BUILD_TAG"
-				// echo "BUILD_URL - $env.BUILD_URL"
-				// echo "JOB_NAME - $env.JOB_NAME"
+				Trying to understand the environment variables mentioned in pipeline -> pipeline syntax -> env
+				echo "PATH - $PATH" // /opt/java/openjdk/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+				echo "BUILD_NUMBER - $env.BUILD_NUMBER"
+				echo "BUILD_ID - $env.BUILD_ID"
+				echo "BUILD_TAG - $env.BUILD_TAG"
+				echo "BUILD_URL - $env.BUILD_URL"
+				echo "JOB_NAME - $env.JOB_NAME"
 				}
 			}
 		stage('Compile') {
