@@ -40,4 +40,16 @@ pipeline{
 			}
 		}
 	}
+
+	post{
+		always {
+			echo 'This block always runs'
+		}
+		success {
+			echo 'This block runs when build is successful'
+		}
+		failure {
+			echo 'This block runs when build fails'
+		}
+	}
 }
