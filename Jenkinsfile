@@ -36,8 +36,8 @@ pipeline{
 		stage('Build') {
 			steps{
 				// sh "node --version"
-				// sh "maven --version" 
-				sh "docker version"
+				sh "mvn --version" 
+				// sh "docker version"
 				echo "Build"
 				// Trying to understand the environment variables mentioned in pipeline -> pipeline syntax -> env
 				echo "PATH - $PATH" // /opt/java/openjdk/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
