@@ -37,25 +37,33 @@ pipeline{
 			steps{
 				// sh "node --version"
 				sh "mvn --version" 
-				// sh "docker version"
+				sh "docker version"
 				echo "Build"
 				// Trying to understand the environment variables mentioned in pipeline -> pipeline syntax -> env
-				echo "PATH - $PATH" // /opt/java/openjdk/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
-				echo "BUILD_NUMBER - $env.BUILD_NUMBER"
-				echo "BUILD_ID - $env.BUILD_ID"
-				echo "BUILD_TAG - $env.BUILD_TAG"
-				echo "BUILD_URL - $env.BUILD_URL"
-				echo "JOB_NAME - $env.JOB_NAME"
+				// echo "PATH - $PATH" // /opt/java/openjdk/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+				// echo "BUILD_NUMBER - $env.BUILD_NUMBER"
+				// echo "BUILD_ID - $env.BUILD_ID"
+				// echo "BUILD_TAG - $env.BUILD_TAG"
+				// echo "BUILD_URL - $env.BUILD_URL"
+				// echo "JOB_NAME - $env.JOB_NAME"
+				}
+			}
+		stage('Compile') {
+			steps {
+				// echo "Test"
+				sh "mvn clean compile"
 				}
 			}
 		stage('Test') {
 			steps {
-				echo "Test"
+				// echo "Test"
+				sh "mvn test"
 				}
 			}
 		stage('Integration Test') {
 			steps{
-			echo "Integration Test"
+			// echo "Integration Test"
+			sh "mvn failsafe:integration-test failsafe:verify"
 			}
 		}
 	}
