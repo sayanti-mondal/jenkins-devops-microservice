@@ -25,13 +25,22 @@ pipeline{
 	agent any
 	// agent {docker {image 'maven:3.6.3'}} we can run the pipeline inside a docker image also
 	// agent {docker {image 'node:13.8'}}
+
+    // make maven and docker available for buld machine 1st
+	environment{
+           dockerHome = tool 'myDocker'
+		   mavenHome = tool 'myMaven'
+		   PATH = "$dockerHome/bin:$mavenHome/bin:$PATH"
+	}
 	stages{
 		stage('Build') {
 			steps{
 				// sh "node --version"
+				sh "maven --version" 
+				sh "docker version"
 				echo "Build"
 				// Trying to understand the environment variables mentioned in pipeline -> pipeline syntax -> env
-				echo "PATH - $PATH"
+				echo "PATH - $PATH" // /opt/java/openjdk/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
 				echo "BUILD_NUMBER - $env.BUILD_NUMBER"
 				echo "BUILD_ID - $env.BUILD_ID"
 				echo "BUILD_TAG - $env.BUILD_TAG"
